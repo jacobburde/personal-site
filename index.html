@@ -4,17 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Illuminations</title>
-  <meta name="description" content="A collection of poems in the style of William Blake's illuminated engravings">
+  <meta name="description" content="A collection of poems">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/etched-text.css">
-  <link rel="stylesheet" href="css/borders.css">
   <link rel="stylesheet" href="css/grid.css">
   <link rel="stylesheet" href="css/responsive.css">
 
@@ -24,21 +22,15 @@
 <body>
   <!-- Site Header -->
   <header class="site-header">
-    <h1 class="site-title etched-deep">Illuminations</h1>
-    <p class="site-subtitle etched">words etched in darkness</p>
+    <h1 class="site-title">Illuminations</h1>
+    <p class="site-subtitle">words etched in darkness</p>
   </header>
 
   <!-- Poem Grid -->
   <main class="poem-grid" aria-label="Poem collection">
-    <!-- Loading state / Empty state will be injected by JS -->
+    <!-- Poems will be injected by JS -->
     <div class="grid-empty">
-      <div class="blank-frame illuminated-frame border-classical">
-        <span class="corner corner--tl border-element" aria-hidden="true"></span>
-        <span class="corner corner--tr border-element" aria-hidden="true"></span>
-        <span class="corner corner--bl border-element" aria-hidden="true"></span>
-        <span class="corner corner--br border-element" aria-hidden="true"></span>
-        <span class="blank-center" aria-hidden="true"></span>
-      </div>
+      <p>Loading poems...</p>
     </div>
   </main>
 

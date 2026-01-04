@@ -1,204 +1,102 @@
-/* Blake-Inspired Poetry Site - Landing Page Grid
-   Visual grid of poem cards with texture and hover effects
-*/
+/* Poetry Site - Landing Page Grid */
 
-/* === MAIN GRID CONTAINER === */
+/* === SITE HEADER === */
+.site-header {
+  text-align: center;
+  padding: var(--space-xl) var(--space-lg) var(--space-lg);
+}
+
+.site-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+.site-subtitle {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-top: var(--space-sm);
+  font-style: italic;
+}
+
+/* === MAIN GRID === */
 .poem-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: clamp(1.5rem, 3vw, 2.5rem);
-  padding: clamp(2rem, 5vw, 4rem);
-  max-width: 1400px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 /* === POEM CARD === */
 .poem-card {
   position: relative;
-  aspect-ratio: 3 / 4;
+  background: var(--bg-card);
+  border-radius: 8px;
   overflow: hidden;
-  cursor: pointer;
-
-  /* Base styling */
-  background-color: var(--ground-warm-black);
-  border: 1px solid var(--light-gold);
-
-  /* Subtle etched border effect */
-  box-shadow:
-    inset 0 0 20px var(--shadow-soft),
-    0 0 0 1px var(--ground-deep-black);
-
-  /* Smooth transitions */
-  transition:
-    transform var(--transition-slow),
-    box-shadow var(--transition-medium);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
 }
 
-/* === CARD TEXTURE LAYER === */
-.poem-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: var(--card-texture);
-  background-size: cover;
-  background-position: center;
-  opacity: var(--texture-opacity, 0.7);
-  mix-blend-mode: multiply;
-  transition: opacity var(--transition-medium);
-  pointer-events: none;
+.poem-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
-/* Fallback gradient when no texture */
-.poem-card:not([style*="--card-texture"])::before {
-  background: linear-gradient(
-    135deg,
-    var(--ground-warm-black) 0%,
-    var(--ground-dark-brown) 50%,
-    var(--ground-burnt-umber) 100%
-  );
-  opacity: 1;
+/* Card image */
+.poem-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background-color: var(--bg-hover);
 }
 
-/* === CARD HOVER GLOW BORDER === */
-.poem-card::after {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border: 1px solid transparent;
-  opacity: 0;
-  transition: opacity var(--transition-medium), border-color var(--transition-medium);
-  pointer-events: none;
-}
-
-/* === CARD CONTENT === */
+/* Card content */
 .poem-card-content {
-  position: relative;
-  z-index: 1;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: clamp(1rem, 3vw, 1.5rem);
-
-  /* Gradient overlay for text readability */
-  background: linear-gradient(
-    to top,
-    rgba(10, 9, 8, 0.9) 0%,
-    rgba(10, 9, 8, 0.4) 40%,
-    transparent 100%
-  );
+  padding: var(--space-md) var(--space-lg);
 }
 
 .poem-card-title {
   font-family: var(--font-display);
-  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-  font-weight: 400;
-  color: var(--light-cream);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  line-height: 1.3;
-
-  /* Etched effect */
-  text-shadow:
-    1px 1px 2px var(--shadow-deep),
-    -0.5px -0.5px 0 var(--highlight-soft);
-
-  transition: color var(--transition-medium), text-shadow var(--transition-medium);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
 }
 
 .poem-card-excerpt {
-  font-family: var(--font-body);
   font-size: 0.9rem;
-  color: var(--light-warm);
-  font-style: italic;
-  margin-top: 0.5rem;
-  opacity: 0.8;
-  line-height: 1.4;
-
-  /* Truncate to 2 lines */
+  color: var(--text-muted);
+  line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* === HOVER STATES === */
-.poem-card:hover {
-  transform: translateY(-4px);
-  box-shadow:
-    inset 0 0 30px var(--shadow-soft),
-    0 8px 30px rgba(0, 0, 0, 0.4),
-    0 0 0 1px var(--light-gold);
-}
-
-.poem-card:hover::before {
-  opacity: calc(var(--texture-opacity, 0.7) - 0.1);
-}
-
-.poem-card:hover::after {
-  border-color: var(--light-gold);
-  opacity: 1;
-  box-shadow:
-    inset 0 0 15px rgba(201, 169, 98, 0.1),
-    0 0 20px rgba(201, 169, 98, 0.1);
-}
-
-.poem-card:hover .poem-card-title {
-  color: var(--light-gold);
-  text-shadow:
-    1px 1px 2px var(--shadow-deep),
-    0 0 15px rgba(201, 169, 98, 0.3);
-}
-
-/* === FOCUS STATES FOR ACCESSIBILITY === */
-.poem-card:focus-visible {
-  outline: 2px solid var(--light-gold);
-  outline-offset: 4px;
-}
-
-/* === LINK WRAPPER === */
+/* Link wrapper */
 .poem-card-link {
   display: block;
   text-decoration: none;
   color: inherit;
-  height: 100%;
+}
+
+.poem-card-link:hover {
+  text-decoration: none;
+}
+
+.poem-card-link:hover .poem-card-title {
+  color: var(--accent);
 }
 
 /* === EMPTY STATE === */
 .grid-empty {
   grid-column: 1 / -1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 60vh;
-}
-
-/* === SITE HEADER === */
-.site-header {
   text-align: center;
-  padding: clamp(3rem, 8vw, 6rem) var(--space-lg) var(--space-lg);
-}
-
-.site-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  font-weight: 400;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--light-pale);
-
-  /* Deep etched effect */
-  text-shadow:
-    2px 2px 3px var(--shadow-deep),
-    1px 1px 2px var(--shadow-soft),
-    -1px -1px 1px var(--highlight-soft);
-}
-
-.site-subtitle {
-  font-family: var(--font-body);
-  font-size: clamp(0.875rem, 2vw, 1rem);
-  font-style: italic;
-  color: var(--light-warm);
-  margin-top: var(--space-sm);
-  letter-spacing: 0.05em;
+  padding: var(--space-xl);
+  color: var(--text-muted);
 }

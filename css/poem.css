@@ -1,83 +1,27 @@
-/* Blake-Inspired Poetry Site - Individual Poem Page Styles
-   Full-page texture backgrounds and poem layout
-*/
+/* Poetry Site - Individual Poem Page */
 
-/* === POEM PAGE CONTAINER ===
-   Full viewport with texture layers
-*/
+/* === PAGE LAYOUT === */
 .poem-page {
-  position: relative;
   min-height: 100vh;
-  background-color: var(--ground-deep-black);
-  display: flex;
-  flex-direction: column;
-}
-
-/* === PRIMARY TEXTURE LAYER ===
-   The main scanned texture background
-*/
-.poem-page::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: var(--texture-primary);
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  opacity: var(--texture-opacity, 0.85);
-  mix-blend-mode: multiply;
-  pointer-events: none;
-  z-index: -2;
-}
-
-/* Fallback gradient when no texture */
-.poem-page:not([style*="--texture-primary"])::before {
-  background: radial-gradient(
-    ellipse at center,
-    var(--ground-dark-brown) 0%,
-    var(--ground-warm-black) 50%,
-    var(--ground-deep-black) 100%
-  );
-  opacity: 1;
-}
-
-/* === SECONDARY GRAIN OVERLAY ===
-   Subtle noise for texture depth
-*/
-.poem-page::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: var(--texture-grain);
-  background-repeat: repeat;
-  opacity: var(--grain-opacity, 0.12);
-  mix-blend-mode: overlay;
-  pointer-events: none;
-  z-index: -1;
+  background-color: var(--bg-primary);
 }
 
 /* === NAVIGATION === */
 .poem-nav {
-  position: relative;
-  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border);
 }
 
 .nav-home {
-  font-family: var(--font-title);
   font-size: 0.875rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--light-warm);
-  text-decoration: none;
-  transition: color var(--transition-fast);
+  color: var(--text-secondary);
 }
 
 .nav-home:hover {
-  color: var(--light-gold);
+  color: var(--accent);
 }
 
 .nav-adjacent {
@@ -87,16 +31,13 @@
 
 .nav-prev,
 .nav-next {
-  font-family: var(--font-body);
   font-size: 0.875rem;
-  color: var(--light-warm);
-  text-decoration: none;
-  transition: color var(--transition-fast);
+  color: var(--text-secondary);
 }
 
 .nav-prev:hover,
 .nav-next:hover {
-  color: var(--light-gold);
+  color: var(--accent);
 }
 
 .nav-prev::before {
@@ -107,97 +48,82 @@
   content: '\00a0\2192';
 }
 
-/* Hide nav links when not available */
 .nav-prev[hidden],
 .nav-next[hidden] {
   visibility: hidden;
 }
 
-/* === MAIN CONTENT AREA === */
+/* === MAIN CONTENT === */
 .poem-container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: var(--space-lg);
+  max-width: 700px;
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-lg);
 }
 
 /* === POEM ARTICLE === */
 .poem-article {
-  width: 100%;
-  max-width: 800px;
-  padding: clamp(2rem, 6vw, 5rem);
+  background: var(--bg-card);
+  border-radius: 8px;
+  padding: var(--space-xl);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 /* === POEM HEADER === */
 .poem-header {
   text-align: center;
   margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--border);
 }
 
-/* === POEM CONTENT WRAPPER ===
-   Centers the poem text with proper measure
-*/
+.poem-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.poem-attribution {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* === POEM BODY === */
 .poem-content {
-  max-width: 600px;
+  max-width: 550px;
   margin: 0 auto;
 }
 
-/* === LOADING STATE === */
-.poem-loading {
-  text-align: center;
-  padding: var(--space-xl);
-}
-
-.loading-text {
+.poem-body {
   font-family: var(--font-body);
-  font-style: italic;
-  color: var(--light-warm);
-  opacity: 0.6;
+  font-size: 1.125rem;
+  line-height: 1.9;
+  color: var(--text-primary);
 }
 
-/* === ERROR STATE === */
+.poem-body p {
+  margin-bottom: 1.5em;
+}
+
+/* === STATES === */
+.poem-loading,
 .poem-error {
   text-align: center;
   padding: var(--space-xl);
-}
-
-.error-text {
-  font-family: var(--font-body);
-  color: var(--light-copper);
-}
-
-/* === TEXTURE DATA ATTRIBUTES ===
-   Alternative to inline styles for texture selection
-*/
-[data-texture="dark-paper"] {
-  --texture-primary: url('../assets/textures/base/dark-paper.webp');
-}
-
-[data-texture="aged-parchment"] {
-  --texture-primary: url('../assets/textures/base/aged-parchment.webp');
-}
-
-[data-texture="scratched-metal"] {
-  --texture-primary: url('../assets/textures/base/scratched-metal.webp');
-  --texture-opacity: 0.75;
+  color: var(--text-muted);
 }
 
 /* === FOOTER === */
 .poem-footer {
   text-align: center;
   padding: var(--space-xl) var(--space-lg);
-  margin-top: auto;
 }
 
 .footer-ornament {
   display: inline-block;
   width: 40px;
-  height: 2px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--light-gold),
-    transparent
-  );
+  height: 1px;
+  background: var(--border);
 }
