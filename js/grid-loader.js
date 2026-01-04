@@ -19,15 +19,7 @@
 
     // Apply texture if specified
     if (poem.texture) {
-      var baseTextures = ['dark-paper', 'aged-parchment', 'scratched-metal'];
-      var texturePath;
-
-      if (baseTextures.indexOf(poem.texture) !== -1) {
-        texturePath = 'assets/textures/base/' + poem.texture + '.webp';
-      } else {
-        texturePath = 'assets/textures/poems/' + poem.texture + '.webp';
-      }
-
+      var texturePath = window.BlakePoetry.getTexturePath(poem.texture);
       card.style.setProperty('--card-texture', 'url("' + texturePath + '")');
     }
 

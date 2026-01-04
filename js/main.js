@@ -45,6 +45,21 @@
     }
   }
 
+  // Base textures that ship with the site
+  var BASE_TEXTURES = ['dark-paper', 'aged-parchment', 'scratched-metal'];
+
+  /**
+   * Get texture URL path for a given texture name
+   * @param {string} textureName - Name of the texture file (without path/extension)
+   * @returns {string} Full URL path to texture
+   */
+  function getTexturePath(textureName) {
+    if (BASE_TEXTURES.indexOf(textureName) !== -1) {
+      return 'assets/textures/base/' + textureName + '.webp';
+    }
+    return 'assets/textures/poems/' + textureName + '.webp';
+  }
+
   /**
    * Apply texture based on data attribute or frontmatter
    * @param {HTMLElement} element - Element to apply texture to
@@ -52,18 +67,7 @@
    */
   function applyTexture(element, textureName) {
     if (!textureName) return;
-
-    // Check if it's a base texture or poem-specific
-    var texturePath;
-    var baseTextures = ['dark-paper', 'aged-parchment', 'scratched-metal'];
-
-    if (baseTextures.indexOf(textureName) !== -1) {
-      texturePath = 'assets/textures/base/' + textureName + '.webp';
-    } else {
-      texturePath = 'assets/textures/poems/' + textureName + '.webp';
-    }
-
-    element.style.setProperty('--texture-primary', 'url("' + texturePath + '")');
+    element.style.setProperty('--texture-primary', 'url("' + getTexturePath(textureName) + '")');
   }
 
   /**
@@ -118,6 +122,7 @@
   window.BlakePoetry = {
     applyBorderTheme: applyBorderTheme,
     applyTexture: applyTexture,
+    getTexturePath: getTexturePath,
     escapeHtml: escapeHtml,
     getQueryParams: getQueryParams,
     debounce: debounce
