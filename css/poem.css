@@ -1,0 +1,203 @@
+/* Blake-Inspired Poetry Site - Individual Poem Page Styles
+   Full-page texture backgrounds and poem layout
+*/
+
+/* === POEM PAGE CONTAINER ===
+   Full viewport with texture layers
+*/
+.poem-page {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--ground-deep-black);
+  display: flex;
+  flex-direction: column;
+}
+
+/* === PRIMARY TEXTURE LAYER ===
+   The main scanned texture background
+*/
+.poem-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: var(--texture-primary);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  opacity: var(--texture-opacity, 0.85);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: -2;
+}
+
+/* Fallback gradient when no texture */
+.poem-page:not([style*="--texture-primary"])::before {
+  background: radial-gradient(
+    ellipse at center,
+    var(--ground-dark-brown) 0%,
+    var(--ground-warm-black) 50%,
+    var(--ground-deep-black) 100%
+  );
+  opacity: 1;
+}
+
+/* === SECONDARY GRAIN OVERLAY ===
+   Subtle noise for texture depth
+*/
+.poem-page::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: var(--texture-grain);
+  background-repeat: repeat;
+  opacity: var(--grain-opacity, 0.12);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* === NAVIGATION === */
+.poem-nav {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+}
+
+.nav-home {
+  font-family: var(--font-title);
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--light-warm);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.nav-home:hover {
+  color: var(--light-gold);
+}
+
+.nav-adjacent {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.nav-prev,
+.nav-next {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--light-warm);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.nav-prev:hover,
+.nav-next:hover {
+  color: var(--light-gold);
+}
+
+.nav-prev::before {
+  content: '\2190\00a0';
+}
+
+.nav-next::after {
+  content: '\00a0\2192';
+}
+
+/* Hide nav links when not available */
+.nav-prev[hidden],
+.nav-next[hidden] {
+  visibility: hidden;
+}
+
+/* === MAIN CONTENT AREA === */
+.poem-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: var(--space-lg);
+}
+
+/* === POEM ARTICLE === */
+.poem-article {
+  width: 100%;
+  max-width: 800px;
+  padding: clamp(2rem, 6vw, 5rem);
+}
+
+/* === POEM HEADER === */
+.poem-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+/* === POEM CONTENT WRAPPER ===
+   Centers the poem text with proper measure
+*/
+.poem-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* === LOADING STATE === */
+.poem-loading {
+  text-align: center;
+  padding: var(--space-xl);
+}
+
+.loading-text {
+  font-family: var(--font-body);
+  font-style: italic;
+  color: var(--light-warm);
+  opacity: 0.6;
+}
+
+/* === ERROR STATE === */
+.poem-error {
+  text-align: center;
+  padding: var(--space-xl);
+}
+
+.error-text {
+  font-family: var(--font-body);
+  color: var(--light-copper);
+}
+
+/* === TEXTURE DATA ATTRIBUTES ===
+   Alternative to inline styles for texture selection
+*/
+[data-texture="dark-paper"] {
+  --texture-primary: url('../assets/textures/base/dark-paper.webp');
+}
+
+[data-texture="aged-parchment"] {
+  --texture-primary: url('../assets/textures/base/aged-parchment.webp');
+}
+
+[data-texture="scratched-metal"] {
+  --texture-primary: url('../assets/textures/base/scratched-metal.webp');
+  --texture-opacity: 0.75;
+}
+
+/* === FOOTER === */
+.poem-footer {
+  text-align: center;
+  padding: var(--space-xl) var(--space-lg);
+  margin-top: auto;
+}
+
+.footer-ornament {
+  display: inline-block;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--light-gold),
+    transparent
+  );
+}

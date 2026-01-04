@@ -1,0 +1,243 @@
+/* Blake-Inspired Poetry Site - Responsive Styles
+   Mobile-first breakpoints and accessibility
+*/
+
+/* === MOBILE BASE (< 480px) === */
+@media (max-width: 479px) {
+  /* Grid */
+  .poem-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .poem-card {
+    aspect-ratio: 4 / 3;
+  }
+
+  /* Frame */
+  .illuminated-frame {
+    padding: 1.5rem;
+    --frame-inset: 0.75rem;
+    --corner-size: 40px;
+  }
+
+  /* Hide edge decorations on mobile */
+  .edge {
+    display: none;
+  }
+
+  /* Navigation */
+  .poem-nav {
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: center;
+  }
+
+  .nav-adjacent {
+    gap: var(--space-md);
+  }
+
+  /* Header */
+  .site-header {
+    padding: 2rem 1rem 1rem;
+  }
+}
+
+/* === SMALL TABLETS (480px - 767px) === */
+@media (min-width: 480px) and (max-width: 767px) {
+  .poem-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    padding: 1.5rem;
+  }
+
+  .illuminated-frame {
+    padding: 2rem;
+    --frame-inset: 1rem;
+    --corner-size: 60px;
+  }
+
+  /* Simplified edges */
+  .edge--left,
+  .edge--right {
+    display: none;
+  }
+}
+
+/* === TABLET LANDSCAPE / SMALL DESKTOP (768px - 1023px) === */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .poem-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+
+  .illuminated-frame {
+    padding: 3rem;
+    --frame-inset: 1.5rem;
+    --corner-size: 80px;
+  }
+}
+
+/* === DESKTOP (1024px+) === */
+@media (min-width: 1024px) {
+  .poem-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 3rem;
+  }
+
+  /* Full hover effects on desktop */
+  .poem-card:hover {
+    transform: translateY(-4px) scale(1.02);
+  }
+
+  .illuminated-frame {
+    padding: 4rem;
+    --frame-inset: 2rem;
+    --corner-size: 100px;
+  }
+}
+
+/* === LARGE DESKTOP (1280px+) === */
+@media (min-width: 1280px) {
+  .poem-grid {
+    max-width: 1600px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .poem-content {
+    max-width: 700px;
+  }
+}
+
+/* === TOUCH DEVICE HANDLING === */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects that don't work on touch */
+  .poem-card:hover {
+    transform: none;
+    box-shadow: inset 0 0 20px var(--shadow-soft);
+  }
+
+  .poem-card:hover::after {
+    opacity: 0;
+  }
+
+  .poem-card:hover .poem-card-title {
+    color: var(--light-cream);
+    text-shadow:
+      1px 1px 2px var(--shadow-deep),
+      -0.5px -0.5px 0 var(--highlight-soft);
+  }
+
+  /* Larger touch targets */
+  .poem-card {
+    min-height: 180px;
+  }
+
+  /* Active state for touch feedback */
+  .poem-card:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+
+  /* Increase text size for readability on touch devices */
+  .poem-body {
+    font-size: 1.15rem;
+    line-height: 1.85;
+  }
+
+  /* Larger nav links */
+  .nav-home,
+  .nav-prev,
+  .nav-next {
+    padding: var(--space-sm);
+  }
+}
+
+/* === REDUCED MOTION === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Keep the breathing animation very subtle */
+  .blank-center {
+    animation: none;
+    opacity: 0.3;
+  }
+}
+
+/* === HIGH CONTRAST MODE === */
+@media (prefers-contrast: high) {
+  :root {
+    --light-cream: #ffffff;
+    --light-warm: #f0f0f0;
+    --light-gold: #ffd700;
+    --ground-deep-black: #000000;
+    --texture-opacity: 0.5;
+  }
+
+  /* Remove text shadows for clarity */
+  .etched,
+  .etched-deep,
+  .etched-textured,
+  .etched-prominent {
+    text-shadow: none;
+  }
+
+  /* Higher contrast borders */
+  .poem-card {
+    border-width: 2px;
+  }
+
+  .border-etched,
+  .border-classical {
+    border-width: 3px;
+  }
+}
+
+/* === DARK MODE PREFERENCE ===
+   Site is already dark, but ensure consistency
+*/
+@media (prefers-color-scheme: dark) {
+  /* No changes needed - site is dark by default */
+}
+
+/* === PRINT STYLES === */
+@media print {
+  .poem-page::before,
+  .poem-page::after {
+    display: none;
+  }
+
+  .poem-nav {
+    display: none;
+  }
+
+  .illuminated-frame {
+    border: 1px solid #333;
+    padding: 1in;
+  }
+
+  .corner,
+  .edge {
+    display: none;
+  }
+
+  .poem-title,
+  .poem-body {
+    color: #000;
+    text-shadow: none;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+}

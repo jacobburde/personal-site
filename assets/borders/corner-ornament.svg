@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+  <!-- Simple corner flourish -->
+  <path d="M 10 90 Q 10 10 90 10" stroke-linecap="round"/>
+  <path d="M 15 85 Q 15 15 85 15" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Corner accent -->
+  <circle cx="12" cy="88" r="3" fill="currentColor"/>
+  <circle cx="88" cy="12" r="3" fill="currentColor"/>
+
+  <!-- Decorative curves -->
+  <path d="M 25 75 Q 25 25 75 25" stroke-linecap="round" opacity="0.4"/>
+  <path d="M 30 60 C 30 40 40 30 60 30" stroke-linecap="round" opacity="0.3"/>
+</svg>

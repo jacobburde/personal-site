@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" fill="none" stroke="currentColor" stroke-width="1">
+  <!-- Repeating wave pattern -->
+  <path d="M 0 15 Q 15 5 30 15 Q 45 25 60 15" stroke-linecap="round"/>
+  <path d="M 0 15 Q 15 8 30 15 Q 45 22 60 15" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- Accent dots -->
+  <circle cx="15" cy="10" r="1.5" fill="currentColor" opacity="0.6"/>
+  <circle cx="45" cy="20" r="1.5" fill="currentColor" opacity="0.6"/>
+</svg>

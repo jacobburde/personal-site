@@ -1,0 +1,256 @@
+/* Blake-Inspired Poetry Site - Decorative Border System
+   Ornate frames inspired by Blake's illuminated manuscript borders
+*/
+
+/* === ILLUMINATED FRAME CONTAINER ===
+   The main frame wrapper for poem pages
+*/
+.illuminated-frame {
+  position: relative;
+  padding: clamp(2rem, 5vw, 4rem);
+
+  /* Frame positioning reference */
+  --frame-inset: clamp(1.5rem, 4vw, 3rem);
+  --corner-size: clamp(60px, 10vw, 100px);
+  --edge-thickness: clamp(20px, 3vw, 35px);
+}
+
+/* === SVG COLOR FILTER ===
+   Converts black SVGs to gold/cream tones
+*/
+.border-element {
+  /* Gold tint filter for SVG elements */
+  filter:
+    brightness(0)
+    saturate(100%)
+    invert(75%)
+    sepia(30%)
+    saturate(500%)
+    hue-rotate(5deg)
+    brightness(95%);
+}
+
+.border-element--cream {
+  filter:
+    brightness(0)
+    saturate(100%)
+    invert(95%)
+    sepia(10%)
+    saturate(200%)
+    hue-rotate(10deg);
+}
+
+.border-element--copper {
+  filter:
+    brightness(0)
+    saturate(100%)
+    invert(55%)
+    sepia(50%)
+    saturate(600%)
+    hue-rotate(350deg)
+    brightness(90%);
+}
+
+/* === CORNER ORNAMENTS ===
+   Positioned at the four corners of the frame
+*/
+.corner {
+  position: absolute;
+  width: var(--corner-size);
+  height: var(--corner-size);
+  background-image: var(--border-corner, url('../assets/borders/corner-ornament.svg'));
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.corner--tl {
+  top: var(--frame-inset);
+  left: var(--frame-inset);
+}
+
+.corner--tr {
+  top: var(--frame-inset);
+  right: var(--frame-inset);
+  transform: scaleX(-1);
+}
+
+.corner--bl {
+  bottom: var(--frame-inset);
+  left: var(--frame-inset);
+  transform: scaleY(-1);
+}
+
+.corner--br {
+  bottom: var(--frame-inset);
+  right: var(--frame-inset);
+  transform: scale(-1);
+}
+
+/* === EDGE DECORATIONS ===
+   Repeating patterns along frame edges
+*/
+.edge {
+  position: absolute;
+  background-image: var(--border-edge, url('../assets/borders/edge-pattern.svg'));
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.edge--top,
+.edge--bottom {
+  left: calc(var(--frame-inset) + var(--corner-size));
+  right: calc(var(--frame-inset) + var(--corner-size));
+  height: var(--edge-thickness);
+}
+
+.edge--top {
+  top: var(--frame-inset);
+}
+
+.edge--bottom {
+  bottom: var(--frame-inset);
+  transform: scaleY(-1);
+}
+
+.edge--left,
+.edge--right {
+  top: calc(var(--frame-inset) + var(--corner-size));
+  bottom: calc(var(--frame-inset) + var(--corner-size));
+  width: var(--edge-thickness);
+  background-repeat: repeat-y;
+  background-size: 100% auto;
+}
+
+.edge--left {
+  left: var(--frame-inset);
+}
+
+.edge--right {
+  right: var(--frame-inset);
+  transform: scaleX(-1);
+}
+
+/* === BORDER THEMES ===
+   Per-poem border variations via custom properties
+*/
+
+/* Vine/Nature theme - organic, twisting */
+.border-theme-vine {
+  --border-corner: url('../assets/borders/vine-corner.svg');
+  --border-edge: url('../assets/borders/vine-edge.svg');
+  --border-color: var(--light-cream);
+}
+
+/* Flame/Passion theme - dynamic, energetic */
+.border-theme-flame {
+  --border-corner: url('../assets/borders/flame-corner.svg');
+  --border-edge: url('../assets/borders/flame-edge.svg');
+  --border-color: var(--light-copper);
+}
+
+/* Serpent/Energy theme - sinuous, powerful */
+.border-theme-serpent {
+  --border-corner: url('../assets/borders/serpent-corner.svg');
+  --border-edge: url('../assets/borders/serpent-edge.svg');
+  --border-color: var(--light-gold);
+}
+
+/* Celestial theme - stars, cosmic */
+.border-theme-celestial {
+  --border-corner: url('../assets/borders/celestial-corner.svg');
+  --border-edge: url('../assets/borders/celestial-edge.svg');
+  --border-color: var(--light-pale);
+}
+
+/* Minimal theme - simple geometric */
+.border-theme-minimal {
+  --border-corner: url('../assets/borders/minimal-corner.svg');
+  --border-edge: none;
+}
+
+/* === CSS-ONLY SIMPLE BORDER ===
+   Fallback when SVGs aren't available
+*/
+.border-etched {
+  position: relative;
+  border: 2px solid var(--light-gold);
+  box-shadow:
+    0 0 0 1px var(--ground-warm-black),
+    0 0 0 3px var(--light-copper),
+    0 0 0 4px var(--ground-warm-black),
+    inset 0 0 30px var(--shadow-soft);
+}
+
+/* Double-line classical border */
+.border-classical {
+  border: 1px solid var(--light-cream);
+  outline: 1px solid var(--light-cream);
+  outline-offset: 6px;
+}
+
+/* Inner shadow to create depth */
+.border-classical::before {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(245, 240, 230, 0.3);
+  pointer-events: none;
+}
+
+/* === BLANK ILLUMINATION FRAME ===
+   Ornate frame for empty state - the frame IS the content
+*/
+.blank-illumination {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+}
+
+.blank-frame {
+  width: min(90vw, 600px);
+  aspect-ratio: 3 / 4;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Central emptiness with subtle presence */
+.blank-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 2px;
+  height: 2px;
+  background: var(--light-gold);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    opacity: 0.2;
+    box-shadow: 0 0 10px rgba(201, 169, 98, 0.1);
+  }
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 30px rgba(201, 169, 98, 0.2);
+  }
+}
+
+/* Inner boundary hint */
+.blank-frame::before {
+  content: '';
+  position: absolute;
+  inset: 15%;
+  border: 1px solid rgba(245, 240, 230, 0.05);
+  pointer-events: none;
+}

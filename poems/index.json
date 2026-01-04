@@ -1,0 +1,10 @@
+[
+  {
+    "slug": "example",
+    "title": "First Light",
+    "excerpt": "Before the words were carved, before the plate was scored...",
+    "texture": "dark-paper",
+    "border": "vine",
+    "order": 1
+  }
+]
