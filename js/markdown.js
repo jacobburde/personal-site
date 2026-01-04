@@ -79,12 +79,12 @@
     var stanzas = escaped.split(/\n\s*\n/);
 
     var html = stanzas.map(function(stanza) {
-      // Process emphasis
+      // Process emphasis (bold first, then italic)
       var processed = stanza
         // Bold: **text**
         .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-        // Italic: *text* (but not **)
-        .replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>');
+        // Italic: *text* (safe after bold is processed)
+        .replace(/\*([^*]+)\*/g, '<em>$1</em>');
 
       // Convert single line breaks to <br>
       processed = processed.split('\n').join('<br>\n');

@@ -152,21 +152,7 @@
   --border-color: var(--light-copper);
 }
 
-/* Serpent/Energy theme - sinuous, powerful */
-.border-theme-serpent {
-  --border-corner: url('../assets/borders/serpent-corner.svg');
-  --border-edge: url('../assets/borders/serpent-edge.svg');
-  --border-color: var(--light-gold);
-}
-
-/* Celestial theme - stars, cosmic */
-.border-theme-celestial {
-  --border-corner: url('../assets/borders/celestial-corner.svg');
-  --border-edge: url('../assets/borders/celestial-edge.svg');
-  --border-color: var(--light-pale);
-}
-
-/* Minimal theme - simple geometric */
+/* Minimal theme - simple geometric (corners only, no edge pattern) */
 .border-theme-minimal {
   --border-corner: url('../assets/borders/minimal-corner.svg');
   --border-edge: none;

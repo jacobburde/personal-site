@@ -45,6 +45,13 @@
     }
   }
 
+  // CSS gradient fallbacks for base textures (used when image files are unavailable)
+  var TEXTURE_FALLBACKS = {
+    'dark-paper': 'linear-gradient(180deg, #1a1612 0%, #0d0b09 50%, #1a1612 100%)',
+    'aged-parchment': 'linear-gradient(135deg, #d4c4a8 0%, #c9b896 50%, #bfae8a 100%)',
+    'scratched-metal': 'linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 50%, #3a3a3a 100%)'
+  };
+
   // Base textures that ship with the site
   var BASE_TEXTURES = ['dark-paper', 'aged-parchment', 'scratched-metal'];
 
@@ -62,12 +69,27 @@
 
   /**
    * Apply texture based on data attribute or frontmatter
+   * Falls back to CSS gradient if image fails to load
    * @param {HTMLElement} element - Element to apply texture to
    * @param {string} textureName - Name of the texture file (without path/extension)
    */
   function applyTexture(element, textureName) {
     if (!textureName) return;
-    element.style.setProperty('--texture-primary', 'url("' + getTexturePath(textureName) + '")');
+
+    var texturePath = getTexturePath(textureName);
+    var fallback = TEXTURE_FALLBACKS[textureName];
+
+    // Try to load the image, fall back to gradient if it fails
+    var img = new Image();
+    img.onload = function() {
+      element.style.setProperty('--texture-primary', 'url("' + texturePath + '")');
+    };
+    img.onerror = function() {
+      if (fallback) {
+        element.style.setProperty('--texture-primary', fallback);
+      }
+    };
+    img.src = texturePath;
   }
 
   /**
