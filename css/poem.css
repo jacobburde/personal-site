@@ -1,9 +1,12 @@
-/* Poetry Site - Individual Poem Page */
+/* Fulgurations - Individual Poem Page
+   Clean, centered reading experience
+*/
 
 /* === PAGE LAYOUT === */
 .poem-page {
   min-height: 100vh;
-  background-color: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
 }
 
 /* === NAVIGATION === */
@@ -13,14 +16,19 @@
   align-items: center;
   padding: var(--space-md) var(--space-lg);
   border-bottom: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
 }
 
 .nav-home {
-  font-size: 0.875rem;
   color: var(--text-secondary);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .nav-home:hover {
+  text-decoration: underline;
   color: var(--accent);
 }
 
@@ -31,99 +39,121 @@
 
 .nav-prev,
 .nav-next {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
+  color: var(--text-muted);
+  text-decoration: none;
 }
 
 .nav-prev:hover,
 .nav-next:hover {
+  text-decoration: underline;
   color: var(--accent);
-}
-
-.nav-prev::before {
-  content: '\2190\00a0';
-}
-
-.nav-next::after {
-  content: '\00a0\2192';
 }
 
 .nav-prev[hidden],
 .nav-next[hidden] {
-  visibility: hidden;
+  display: none;
 }
 
 /* === MAIN CONTENT === */
 .poem-container {
-  max-width: 700px;
+  flex: 1;
+  max-width: 650px;
+  width: 100%;
   margin: 0 auto;
   padding: var(--space-xl) var(--space-lg);
 }
 
 /* === POEM ARTICLE === */
 .poem-article {
-  background: var(--bg-card);
-  border-radius: 8px;
-  padding: var(--space-xl);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  opacity: 0;
+}
+
+.poem-article:not([hidden]) {
+  animation: fadeIn 0.5s ease-out forwards;
 }
 
 /* === POEM HEADER === */
 .poem-header {
   text-align: center;
   margin-bottom: var(--space-xl);
-  padding-bottom: var(--space-lg);
-  border-bottom: 1px solid var(--border);
 }
 
 .poem-title {
-  font-family: var(--font-display);
+  font-family: var(--font-serif);
   font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 700;
+  font-weight: 400;
   color: var(--text-primary);
-  margin-bottom: var(--space-sm);
-}
-
-.poem-attribution {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  font-style: italic;
+  letter-spacing: 0.05em;
+  line-height: 1.3;
 }
 
 /* === POEM BODY === */
-.poem-content {
-  max-width: 550px;
-  margin: 0 auto;
-}
-
 .poem-body {
-  font-family: var(--font-body);
-  font-size: 1.125rem;
-  line-height: 1.9;
+  font-family: var(--font-serif);
+  font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+  line-height: 1.7;
   color: var(--text-primary);
 }
 
 .poem-body p {
-  margin-bottom: 1.5em;
+  margin-bottom: 1.8em;
+}
+
+.poem-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Emphasis styles */
+.poem-body em {
+  font-style: italic;
+}
+
+.poem-body strong {
+  font-weight: 600;
 }
 
 /* === STATES === */
-.poem-loading,
 .poem-error {
   text-align: center;
   padding: var(--space-xl);
   color: var(--text-muted);
 }
 
-/* === FOOTER === */
-.poem-footer {
-  text-align: center;
-  padding: var(--space-xl) var(--space-lg);
+.poem-error[hidden] {
+  display: none;
 }
 
-.footer-ornament {
-  display: inline-block;
-  width: 40px;
-  height: 1px;
-  background: var(--border);
+/* === FOOTER NAVIGATION === */
+.poem-footer {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border);
+}
+
+.poem-nav-footer {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+}
+
+.nav-prev-footer,
+.nav-next-footer {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.nav-prev-footer:hover,
+.nav-next-footer:hover {
+  text-decoration: underline;
+  color: var(--accent);
+}
+
+.nav-prev-footer[hidden],
+.nav-next-footer[hidden] {
+  display: none;
+}
+
+.nav-next-footer {
+  margin-left: auto;
 }

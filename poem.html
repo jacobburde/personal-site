@@ -3,13 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Poem | Illuminations</title>
+  <title>Poem | Fulgurations</title>
   <meta name="description" content="A poem">
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/base.css">
@@ -22,7 +17,7 @@
 <body class="poem-page">
   <!-- Navigation -->
   <nav class="poem-nav" aria-label="Poem navigation">
-    <a href="index.html" class="nav-home">Back to Index</a>
+    <a href="index.html" class="nav-home">Fulgurations</a>
     <div class="nav-adjacent">
       <a href="#" class="nav-prev" hidden>Previous</a>
       <a href="#" class="nav-next" hidden>Next</a>
@@ -31,36 +26,31 @@
 
   <!-- Main Content -->
   <main class="poem-container">
-    <!-- Loading State -->
-    <div class="poem-loading">
-      <p>Loading...</p>
-    </div>
-
     <!-- Error State (hidden by default) -->
-    <div class="poem-error" style="display: none;">
+    <div class="poem-error" hidden>
       <p>Could not load poem</p>
       <p><a href="index.html">Return to index</a></p>
     </div>
 
     <!-- Poem Content (populated by JS) -->
-    <article class="poem-article" style="display: none;">
+    <article class="poem-article" hidden>
       <!-- Poem Header -->
       <header class="poem-header">
         <h1 class="poem-title"></h1>
-        <p class="poem-attribution" style="display: none;"></p>
       </header>
 
       <!-- Poem Body -->
-      <div class="poem-content">
-        <div class="poem-body"></div>
-      </div>
+      <div class="poem-body"></div>
+
+      <!-- Poem Navigation -->
+      <footer class="poem-footer">
+        <div class="poem-nav-footer">
+          <a href="#" class="nav-prev-footer" hidden>Previous</a>
+          <a href="#" class="nav-next-footer" hidden>Next</a>
+        </div>
+      </footer>
     </article>
   </main>
-
-  <!-- Footer -->
-  <footer class="poem-footer">
-    <span class="footer-ornament" aria-hidden="true"></span>
-  </footer>
 
   <!-- Scripts -->
   <script src="js/main.js"></script>

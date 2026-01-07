@@ -1,5 +1,5 @@
 /**
- * Blake-Inspired Poetry Site - Poem Loader
+ * Fulgurations - Poem Loader
  * Loads and renders individual poems from markdown files
  */
 
@@ -90,95 +90,77 @@
    * @param {Object} navigation - Adjacent poems for nav
    */
   function renderPoem(poem, navigation) {
-    var page = document.querySelector('.poem-page');
+    var articleEl = document.querySelector('.poem-article');
     var titleEl = document.querySelector('.poem-title');
-    var attributionEl = document.querySelector('.poem-attribution');
     var bodyEl = document.querySelector('.poem-body');
-    var loadingEl = document.querySelector('.poem-loading');
-    var contentEl = document.querySelector('.poem-content-wrapper');
+
+    // Header nav
     var prevLink = document.querySelector('.nav-prev');
     var nextLink = document.querySelector('.nav-next');
 
-    // Hide loading
-    if (loadingEl) {
-      loadingEl.style.display = 'none';
-    }
-
-    // Show content
-    if (contentEl) {
-      contentEl.style.display = 'block';
-    }
+    // Footer nav
+    var prevFooter = document.querySelector('.nav-prev-footer');
+    var nextFooter = document.querySelector('.nav-next-footer');
 
     // Set title
     if (titleEl) {
       titleEl.textContent = poem.meta.title || 'Untitled';
-      document.title = (poem.meta.title || 'Poem') + ' | Blake\'s Illuminations';
+      document.title = (poem.meta.title || 'Poem') + ' | Fulgurations';
     }
 
-    // Set attribution if available
-    if (attributionEl && poem.meta.attribution) {
-      attributionEl.textContent = poem.meta.attribution;
-      attributionEl.style.display = 'block';
-    } else if (attributionEl) {
-      attributionEl.style.display = 'none';
-    }
-
-    // Set poem body
+    // Set poem body - HTML is pre-sanitized by BlakeMarkdown.parse()
+    // which escapes all user content before converting to HTML
     if (bodyEl) {
       bodyEl.innerHTML = poem.html;
     }
 
-    // Apply texture
-    if (page && poem.meta.texture) {
-      window.BlakePoetry.applyTexture(page, poem.meta.texture);
+    // Show article
+    if (articleEl) {
+      articleEl.removeAttribute('hidden');
     }
 
-    // Apply border theme
-    if (page && poem.meta.border) {
-      page.classList.add('border-theme-' + poem.meta.border);
-    }
-
-    // Set up navigation
+    // Set up header navigation
     if (prevLink) {
       if (navigation.prev) {
         prevLink.href = 'poem.html?poem=' + navigation.prev.slug;
-        prevLink.textContent = navigation.prev.title || 'Previous';
+        prevLink.textContent = 'Previous';
         prevLink.removeAttribute('hidden');
-      } else {
-        prevLink.setAttribute('hidden', '');
       }
     }
 
     if (nextLink) {
       if (navigation.next) {
         nextLink.href = 'poem.html?poem=' + navigation.next.slug;
-        nextLink.textContent = navigation.next.title || 'Next';
+        nextLink.textContent = 'Next';
         nextLink.removeAttribute('hidden');
-      } else {
-        nextLink.setAttribute('hidden', '');
+      }
+    }
+
+    // Set up footer navigation
+    if (prevFooter) {
+      if (navigation.prev) {
+        prevFooter.href = 'poem.html?poem=' + navigation.prev.slug;
+        prevFooter.textContent = 'Previous: ' + (navigation.prev.title || 'Untitled');
+        prevFooter.removeAttribute('hidden');
+      }
+    }
+
+    if (nextFooter) {
+      if (navigation.next) {
+        nextFooter.href = 'poem.html?poem=' + navigation.next.slug;
+        nextFooter.textContent = 'Next: ' + (navigation.next.title || 'Untitled');
+        nextFooter.removeAttribute('hidden');
       }
     }
   }
 
   /**
    * Show error state
-   * @param {string} message - Error message
    */
-  function showError(message) {
-    var loadingEl = document.querySelector('.poem-loading');
+  function showError() {
     var errorEl = document.querySelector('.poem-error');
-    var errorText = document.querySelector('.error-text');
-
-    if (loadingEl) {
-      loadingEl.style.display = 'none';
-    }
-
     if (errorEl) {
-      errorEl.style.display = 'block';
-    }
-
-    if (errorText) {
-      errorText.textContent = message;
+      errorEl.removeAttribute('hidden');
     }
   }
 
@@ -190,7 +172,7 @@
     var slug = params.poem;
 
     if (!slug) {
-      showError('No poem specified');
+      showError();
       return;
     }
 
@@ -198,7 +180,7 @@
     slug = slug.replace(/[^a-zA-Z0-9-]/g, '');
 
     if (!slug) {
-      showError('Invalid poem identifier');
+      showError();
       return;
     }
 
@@ -211,8 +193,8 @@
       var manifest = results[1];
       var navigation = getAdjacentPoems(manifest, slug);
       renderPoem(poem, navigation);
-    }).catch(function(error) {
-      showError('Could not load poem: ' + (error.message || 'Unknown error'));
+    }).catch(function() {
+      showError();
     });
   }
 

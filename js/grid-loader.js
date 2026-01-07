@@ -1,6 +1,6 @@
 /**
- * Blake-Inspired Poetry Site - Grid Loader
- * Builds the landing page poem grid from manifest
+ * Fulgurations - Grid Loader
+ * Builds the landing page poem list from manifest
  */
 
 (function() {
@@ -9,87 +9,42 @@
   var INDEX_PATH = 'poems/index.json';
 
   /**
-   * Create a poem card element
+   * Create a poem list item
    * @param {Object} poem - Poem metadata from manifest
-   * @returns {HTMLElement} Card element
+   * @returns {HTMLElement} List item element
    */
-  function createPoemCard(poem) {
-    var card = document.createElement('article');
-    card.className = 'poem-card';
+  function createPoemItem(poem) {
+    var li = document.createElement('li');
+    li.className = 'poem-list-item';
 
-    // Apply texture if specified
-    if (poem.texture) {
-      var texturePath = window.BlakePoetry.getTexturePath(poem.texture);
-      card.style.setProperty('--card-texture', 'url("' + texturePath + '")');
-    }
-
-    // Create link wrapper
     var link = document.createElement('a');
     link.href = 'poem.html?poem=' + encodeURIComponent(poem.slug);
-    link.className = 'poem-card-link';
+    link.className = 'poem-list-link';
 
-    // Create content container
-    var content = document.createElement('div');
-    content.className = 'poem-card-content';
-
-    // Title
     var title = document.createElement('h2');
-    title.className = 'poem-card-title';
+    title.className = 'poem-list-title';
     title.textContent = poem.title || poem.slug;
 
-    content.appendChild(title);
+    link.appendChild(title);
 
-    // Excerpt if available
     if (poem.excerpt) {
       var excerpt = document.createElement('p');
-      excerpt.className = 'poem-card-excerpt';
+      excerpt.className = 'poem-list-excerpt';
       excerpt.textContent = poem.excerpt;
-      content.appendChild(excerpt);
+      link.appendChild(excerpt);
     }
 
-    link.appendChild(content);
-    card.appendChild(link);
-
-    return card;
+    li.appendChild(link);
+    return li;
   }
 
   /**
-   * Create the blank illumination empty state
-   * @returns {HTMLElement} Empty state element
+   * Load and render the poem list
    */
-  function createEmptyState() {
-    var container = document.createElement('div');
-    container.className = 'grid-empty';
+  function loadIndex() {
+    var indexEl = document.querySelector('.poem-index');
 
-    var frame = document.createElement('div');
-    frame.className = 'blank-frame illuminated-frame border-classical';
-
-    // Corner elements
-    var corners = ['tl', 'tr', 'bl', 'br'];
-    corners.forEach(function(pos) {
-      var corner = document.createElement('span');
-      corner.className = 'corner corner--' + pos + ' border-element';
-      corner.setAttribute('aria-hidden', 'true');
-      frame.appendChild(corner);
-    });
-
-    // Central breathing dot
-    var center = document.createElement('span');
-    center.className = 'blank-center';
-    center.setAttribute('aria-hidden', 'true');
-    frame.appendChild(center);
-
-    container.appendChild(frame);
-    return container;
-  }
-
-  /**
-   * Load and render the poem grid
-   */
-  function loadGrid() {
-    var gridEl = document.querySelector('.poem-grid');
-
-    if (!gridEl) {
+    if (!indexEl) {
       return;
     }
 
@@ -101,12 +56,7 @@
         return response.json();
       })
       .then(function(poems) {
-        // Clear loading state
-        gridEl.innerHTML = '';
-
         if (!poems || poems.length === 0) {
-          // Show empty state
-          gridEl.appendChild(createEmptyState());
           return;
         }
 
@@ -117,25 +67,27 @@
           return orderA - orderB;
         });
 
-        // Create cards
+        // Create list
+        var list = document.createElement('ul');
+        list.className = 'poem-list fade-in';
+
         poems.forEach(function(poem) {
-          var card = createPoemCard(poem);
-          gridEl.appendChild(card);
+          var item = createPoemItem(poem);
+          list.appendChild(item);
         });
+
+        indexEl.appendChild(list);
       })
       .catch(function(error) {
-        // On error, show empty state
-        console.warn('Grid loading error:', error.message);
-        gridEl.innerHTML = '';
-        gridEl.appendChild(createEmptyState());
+        console.warn('Index loading error:', error.message);
       });
   }
 
   /**
-   * Initialize grid page
+   * Initialize index page
    */
   function init() {
-    loadGrid();
+    loadIndex();
   }
 
   // Initialize on DOM ready

@@ -1,11 +1,13 @@
-/* Poetry Site - Responsive Styles */
+/* Fulgurations - Responsive Styles */
 
-/* === MOBILE BASE (< 480px) === */
+/* === MOBILE (< 480px) === */
 @media (max-width: 479px) {
-  .poem-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    padding: 1rem;
+  .site-header {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .poem-index {
+    padding: var(--space-lg) var(--space-md);
   }
 
   .poem-nav {
@@ -18,74 +20,40 @@
     gap: var(--space-md);
   }
 
-  .site-header {
-    padding: 2rem 1rem 1rem;
+  .poem-container {
+    padding: var(--space-lg) var(--space-md);
   }
 
-  .poem-article {
-    padding: var(--space-lg);
-  }
-}
-
-/* === SMALL TABLETS (480px - 767px) === */
-@media (min-width: 480px) and (max-width: 767px) {
-  .poem-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-    padding: 1.5rem;
-  }
-}
-
-/* === TABLET LANDSCAPE / SMALL DESKTOP (768px - 1023px) === */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .poem-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    padding: 2rem;
-  }
-}
-
-/* === DESKTOP (1024px+) === */
-@media (min-width: 1024px) {
-  .poem-grid {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-    padding: 3rem;
-  }
-}
-
-/* === LARGE DESKTOP (1280px+) === */
-@media (min-width: 1280px) {
-  .poem-grid {
-    max-width: 1400px;
-    grid-template-columns: repeat(4, 1fr);
+  .poem-nav-footer {
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: center;
   }
 
-  .poem-content {
-    max-width: 600px;
+  .nav-next-footer {
+    margin-left: 0;
   }
 }
 
 /* === TOUCH DEVICE HANDLING === */
 @media (hover: none) and (pointer: coarse) {
-  .poem-card:hover {
-    transform: none;
-  }
-
-  .poem-card:active {
-    transform: scale(0.98);
-    transition: transform 0.1s ease;
-  }
-
-  .poem-body {
-    font-size: 1.15rem;
-    line-height: 1.85;
-  }
-
+  /* Increase tap targets */
   .nav-home,
   .nav-prev,
-  .nav-next {
+  .nav-next,
+  .nav-prev-footer,
+  .nav-next-footer {
     padding: var(--space-sm);
+  }
+
+  .poem-list-link {
+    padding: var(--space-lg) var(--space-sm);
+  }
+
+  /* Slightly larger body text for readability */
+  .poem-body {
+    font-size: 1.125rem;
+    line-height: 1.75;
   }
 }
 
@@ -98,21 +66,29 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* === PRINT STYLES === */
 @media print {
-  .poem-nav {
+  .poem-nav,
+  .poem-footer {
     display: none;
-  }
-
-  .poem-article {
-    box-shadow: none;
-    border: 1px solid #ccc;
   }
 
   body {
     background: white;
+    color: black;
+  }
+
+  .poem-title {
+    color: black;
+  }
+
+  .poem-body {
     color: black;
   }
 }
