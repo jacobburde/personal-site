@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 35" fill="none" stroke="currentColor" stroke-width="1">
-  <!-- Flickering flame edge -->
-  <path d="M 0 30 C 5 20 10 25 15 15 C 20 5 25 12 30 18 C 35 25 40 10 45 20 C 50 28 55 8 60 15 C 65 22 70 12 75 20 C 78 25 80 20 80 25" stroke-linecap="round"/>
-
-  <!-- Secondary flame line -->
-  <path d="M 0 32 C 8 25 15 28 22 22 C 30 16 38 24 45 18 C 52 12 58 20 65 16 C 72 12 78 18 80 22" stroke-linecap="round" opacity="0.4"/>
-</svg>

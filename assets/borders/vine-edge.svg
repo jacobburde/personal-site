@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 30" fill="none" stroke="currentColor" stroke-width="1">
-  <!-- Wavy vine -->
-  <path d="M 0 15 C 10 10 20 20 30 15 C 40 10 50 20 60 15 C 70 10 80 20 80 15" stroke-linecap="round"/>
-
-  <!-- Small leaves -->
-  <ellipse cx="15" cy="12" rx="4" ry="2" transform="rotate(-20 15 12)" fill="currentColor" opacity="0.4"/>
-  <ellipse cx="45" cy="18" rx="4" ry="2" transform="rotate(20 45 18)" fill="currentColor" opacity="0.4"/>
-  <ellipse cx="75" cy="12" rx="3" ry="1.5" transform="rotate(-20 75 12)" fill="currentColor" opacity="0.4"/>
-</svg>

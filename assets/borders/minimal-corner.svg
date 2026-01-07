@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
-  <!-- Simple geometric corner -->
-  <path d="M 10 90 L 10 10 L 90 10" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="10" cy="10" r="4" fill="currentColor"/>
-</svg>
